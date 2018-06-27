@@ -1,0 +1,26 @@
+<% if @todo.errors.present? %>
+  <div class="container" role="alert">
+    <ul class="list-group">
+      <% @todo.errors.each do |error, message| %>
+        <li class="list-group-item list-group-item-danger"> <%= "#{error.capitalize}  #{message}" %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="form container">
+  <%= form_for @todo do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :due_date %>
+      <div class="form-control"><%= date_select :todo, :due_date %></div>
+    </div>
+    <div class="form-group">
+      <%= f.label :note %>
+      <%= f.text_area :note, class: "form-control" %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+</div>

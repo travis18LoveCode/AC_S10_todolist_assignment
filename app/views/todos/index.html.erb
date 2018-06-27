@@ -1,0 +1,39 @@
+<div class="container">
+  <table class="table table-striped table-condensed table-hover">
+    <th>
+      <tr>
+        <td> </td>
+        <td>Title</td>
+        <td>Due Date</td>
+        <td>Action</td>
+      </tr>
+    </th>
+    <tbody>
+    <% @todos.each do |todo| %>
+     <tr>
+      <td>
+        <% if todo.done %>
+          <%= link_to complete_todo_path(todo), method: :complete do %>
+            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+          <% end %>
+        <% else %>
+          <%= link_to complete_todo_path(todo), method: :complete do %>
+            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+          <% end %>
+        <% end %>
+      </td>
+      <td><%= todo.title %></td>
+      <td><%= todo.due_date %></td>
+      <td>
+        <%= link_to 'Show', todo_path(todo) %>
+        <%= link_to 'Edit', edit_todo_path(todo) %>
+        <% if !todo.overdue %>
+          <%= link_to 'Destroy', todo_path(todo), method: :delete, data:{ confirm: "Are you sure?" } %>
+        <% end %>
+      </td>
+     </tr>
+    <% end %>
+  </tbody>
+  </table>
+  <%= link_to 'New Todo', new_todo_path, class: "btn btn-default" %>
+</div>
